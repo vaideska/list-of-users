@@ -31,7 +31,7 @@ const closeEditMode = () => {
   if (editRow) editRow.classList.remove('edit-mode');
 }
 
-const handleEditRowClick = ({name, phone}) => (event) => {
+const handleEditRowClick = (event) => {
   const rowElement = event.target.closest('.template-row');
   closeEditMode();
   rowElement.classList.add('edit-mode');
@@ -52,7 +52,7 @@ const getRowTable = (userData) => {
   cellNameInput.value = userData.name;
   cellPhoneInput.value = userData.phone;
 
-  editButton.addEventListener('click', handleEditRowClick(userData));
+  editButton.addEventListener('click', handleEditRowClick);
   deleteButton.addEventListener('click', handleDeleteRowClick);
   saveButton.addEventListener('click', () => {
     cellNameElement.textContent = cellNameInput.value;
@@ -77,3 +77,4 @@ const handleAddUserDataSubmit = (event) => {
 formUserData.addEventListener('submit', handleAddUserDataSubmit);
 
 initialListUser.forEach((userData) => renderRow(userData, userTableElement));
+ 
