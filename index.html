@@ -11,7 +11,7 @@
   <header>
   </header>
   <main>
-    <table>
+    <table class="user-table">
       <tr>
         <th>Имя</th>
         <th>Телефон</th>
@@ -30,11 +30,14 @@
   </footer>
   <script src="./scripts/index.js" defer></script>
 
-  <template id="template_cell">
-    <tr>
-      <td class="cell_name"></td>
-      <td class="cell_phone"></td>
-      <td class="cell_buttons"><button>Редактировать</button><button>Удалить</button></td>
+  <template id="template-table-row">
+    <tr class="template-row">
+      <td class="cell-name"></td>
+      <td class="cell-phone"></td>
+      <td class="cell-buttons">
+        <button class="cell-edit-btn">Редактировать</button>
+        <button class="cell-delete-btn">Удалить</button>
+      </td>
     </tr>
   </template>
 </body>
