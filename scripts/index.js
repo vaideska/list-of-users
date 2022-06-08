@@ -17,6 +17,12 @@ const initialListUser = [
   },
 ];
 
+const getDataServer = () => {
+  return new Promise((resolve, reject) => {
+    resolve(initialListUser);
+  });
+}
+
 const userTableElement = document.querySelector('.user-table');
 const formUserData = document.querySelector('.user-data-form');
 const formEditUser = document.querySelector('.edit-user-form');
@@ -25,6 +31,7 @@ const rowTemplate = document.querySelector('#template-table-row')
 
 const handleDeleteRowClick = (event) => {
   event.preventDefault();
+  //fetch
   event.target.closest('.template-row').remove();
 }
 
@@ -61,6 +68,7 @@ const getRowTable = (userData) => {
   deleteButton.addEventListener('click', handleDeleteRowClick);
   formEditUser.addEventListener('submit', (event) => {
     event.preventDefault();
+    //fetch
     cellNameElement.textContent = cellNameInput.value;
     cellPhoneElement.textContent = cellPhoneInput.value;
     closeEditMode();
@@ -82,10 +90,13 @@ const renderRow = (userData, wrap) => {
 const handleAddUserDataSubmit = (event) => {
   event.preventDefault();
   const formData = new FormData(event.target);
+  //fetch
   renderRow(Object.fromEntries(formData), userTableElement);
   event.target.reset();
 }
 
 formUserData.addEventListener('submit', handleAddUserDataSubmit);
 
-initialListUser.forEach((userData) => renderRow(userData, userTableElement));
+getDataServer().then(data => {
+  data.forEach((userData) => renderRow(userData, userTableElement));
+}).catch(console.log);
