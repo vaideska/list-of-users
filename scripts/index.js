@@ -29,24 +29,37 @@ const formEditUser = document.querySelector('.edit-user-form');
 const rowTemplate = document.querySelector('#template-table-row')
   .content.querySelector('.template-row');
 
+const closeEditMode = () => {
+  const editRow = document.querySelector('.edit-mode');
+  if (editRow) editRow.classList.remove('edit-mode');
+}
+
 const handleDeleteRowClick = (event) => {
   event.preventDefault();
   //fetch
   event.target.closest('.template-row').remove();
 }
 
-const closeEditMode = () => {
-  const editRow = document.querySelector('.edit-mode');
-  if (editRow) editRow.classList.remove('edit-mode');
-}
-
-const handleEditRowClick = (event) => {
+const handleEditRowClick = ({ cellNameElement, cellPhoneElement, cellNameInput, cellPhoneInput }) => (event) => {
   event.preventDefault();
-
+  cellNameInput.value = cellNameElement.textContent;
+  cellPhoneInput.value = cellPhoneElement.textContent;
   const rowElement = event.target.closest('.template-row');
   closeEditMode();
   rowElement.classList.add('edit-mode');
-  console.log(rowElement);
+}
+
+const handleEditUserDataSubmit = ({ cellNameElement, cellPhoneElement, cellNameInput, cellPhoneInput }) => (event) => {
+  event.preventDefault();
+  //fetch
+  cellNameElement.textContent = cellNameInput.value;
+  cellPhoneElement.textContent = cellPhoneInput.value;
+  closeEditMode();
+}
+
+const handleCanselEditModeClick = (event) => {
+  event.preventDefault();
+  closeEditMode();
 }
 
 const getRowTable = (userData) => {
@@ -58,27 +71,17 @@ const getRowTable = (userData) => {
   const editButton = rowElement.querySelector('.cell-edit-btn');
   const deleteButton = rowElement.querySelector('.cell-delete-btn');
   const cancelButton = rowElement.querySelector('.cell-cancel-btn');
+  const dataFields = { cellNameElement, cellPhoneElement, cellNameInput, cellPhoneInput }
 
   cellNameElement.textContent = userData.name;
   cellPhoneElement.textContent = userData.phone;
   cellNameInput.value = userData.name;
   cellPhoneInput.value = userData.phone;
 
-  editButton.addEventListener('click', handleEditRowClick);
+  editButton.addEventListener('click', handleEditRowClick(dataFields));
   deleteButton.addEventListener('click', handleDeleteRowClick);
-  formEditUser.addEventListener('submit', (event) => {
-    event.preventDefault();
-    //fetch
-    cellNameElement.textContent = cellNameInput.value;
-    cellPhoneElement.textContent = cellPhoneInput.value;
-    closeEditMode();
-  });
-  cancelButton.addEventListener('click', (event) => {
-    event.preventDefault();
-    closeEditMode();
-    cellNameInput.value = cellNameElement.textContent;
-    cellPhoneInput.value = cellPhoneElement.textContent;
-  })
+  formEditUser.addEventListener('submit', handleEditUserDataSubmit(dataFields));
+  cancelButton.addEventListener('click', handleCanselEditModeClick);
 
   return rowElement;
 }
