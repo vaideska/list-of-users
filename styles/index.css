@@ -1,15 +1,15 @@
 @import url('../vendor/normalize.css');
 
-.template-row input, 
-.template-row .cell-save-btn, 
-.edit-mode span,
-.edit-mode .cell-edit-btn {
+.template-cell-edit-mode,
+.edit-mode .read-mode {
   position: fixed;
   visibility: hidden;
+  top: 0;
+  left: 0;
 }
 
-.edit-mode input,
-.edit-mode .cell-save-btn {
+.template-row,
+.edit-mode .template-cell-edit-mode  {
   position: static;
   visibility: visible;
 }

@@ -37,6 +37,14 @@ const handleEditRowClick = (event) => {
   rowElement.classList.add('edit-mode');
 }
 
+const handleEditUserDataSubmit = ({ cellNameElement, cellPhoneElement }) => (event) => {
+  event.preventDefault();
+  const formData = new FormData(event.target);
+  cellNameElement.textContent = formData.get('name');
+  cellPhoneElement.textContent = formData.get('phone');
+  closeEditMode();
+}
+
 const getRowTable = (userData) => {
   const rowElement = rowTemplate.cloneNode(true);
   const cellNameElement = rowElement.querySelector('.cell-name-value');
@@ -47,6 +55,8 @@ const getRowTable = (userData) => {
   const deleteButton = rowElement.querySelector('.cell-delete-btn');
   const saveButton = rowElement.querySelector('.cell-save-btn');
 
+  const formEditUser = rowElement.querySelector('.edit-user-form');
+
   cellNameElement.textContent = userData.name;
   cellPhoneElement.textContent = userData.phone;
   cellNameInput.value = userData.name;
@@ -54,7 +64,8 @@ const getRowTable = (userData) => {
 
   editButton.addEventListener('click', handleEditRowClick);
   deleteButton.addEventListener('click', handleDeleteRowClick);
-  saveButton.addEventListener('click', () => {
+  formEditUser.addEventListener('submit', (event) => {
+    event.preventDefault();
     cellNameElement.textContent = cellNameInput.value;
     cellPhoneElement.textContent = cellPhoneInput.value;
     closeEditMode();
@@ -77,4 +88,34 @@ const handleAddUserDataSubmit = (event) => {
 formUserData.addEventListener('submit', handleAddUserDataSubmit);
 
 initialListUser.forEach((userData) => renderRow(userData, userTableElement));
+
+
+/*formUserData.addEventListener('input', function (evt) {
+  console.log(evt.target.validity.valid);
+  isValid(evt.target);
+});
+
  
+const showInputError = (element, errorMessage, formError) => {
+  element.classList.add('input-invalid');
+  formError.textContent = errorMessage;
+  formError.classList.add('input-error-active');
+};
+
+const hideInputError = (element, formError) => {
+  element.classList.remove('input-invalid');
+  formError.classList.remove('input-error-active');
+  formError.textContent = '';
+};
+
+
+const isValid = (formInput) => {
+  const formError = formUserData.querySelector(`#${formInput.id}-error`); 
+  if (!formInput.validity.valid) {
+    // Если поле не проходит валидацию, покажем ошибку
+    showInputError(formInput, formInput.validationMessage, formError);
+  } else {
+    // Если проходит, скроем
+    hideInputError(formInput, formError);
+  }
+};*/

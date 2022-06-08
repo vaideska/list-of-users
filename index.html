@@ -20,9 +20,10 @@
     </table>
     <form name="userData" class="user-data-form">
       <input type="text" name="name" placeholder="Имя" required>
-      <input type="tel" name="phone" placeholder="Телефон" required>
+      <!--Паттерн для российского номера с тире (без скобочек): ((8|\+7))[-]{0,1}9[0-9]{2}[-]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}
+      В задании более общее описание, поэтому паттерн другой-->
+      <input type="tel" name="phone" placeholder="Телефон" required pattern="^([0-9]|\+)?([0-9]|[-])+?[0-9]$">
       <button type="submit">Сохранить</button>
-      <div class="error-massage"></div>
     </form>
     
   </main>
@@ -32,18 +33,23 @@
 
   <template id="template-table-row">
     <tr class="template-row">
-      <td class="cell-name">
+      <td class="cell-name read-mode">
         <span class="cell-name-value"></span>
-        <input class="cell-name-input" type="text" name="name" placeholder="Имя" required>
       </td>
-      <td class="cell-phone">
+      <td class="cell-phone read-mode">
         <span class="cell-phone-value"></span>
-        <input class="cell-phone-input" type="tel" name="phone" placeholder="Телефон" required>
       </td>
-      <td class="cell-buttons">
-        <button class="cell-save-btn">Сохранить</button>
+      <td class="cell-buttons read-mode">
         <button class="cell-edit-btn">Редактировать</button>
         <button class="cell-delete-btn">Удалить</button>
+      </td>
+      <td colspan="3" class="template-cell-edit-mode">
+        <form name="editUserData" class="edit-user-form">
+          <input class="cell-name-input" type="text" name="name" placeholder="Имя" required>
+          <input class="cell-phone-input" type="tel" name="phone" placeholder="Телефон" required pattern="^([0-9]|\+)?([0-9]|[-])+?[0-9]$">
+          <button type="submit" class="cell-save-btn">Сохранить</button>
+          <button class="cell-cancel-btn">Отмена</button>
+        </form>
       </td>
     </tr>
   </template>
