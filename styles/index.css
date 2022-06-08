@@ -1,15 +1,77 @@
 @import url('../vendor/normalize.css');
 
-.template-cell-edit-mode,
-.edit-mode .read-mode {
+/* Для переключение режимов */
+.template-row input,
+.edit-mode span,
+.edit-mode .btn-read-mode,
+.btn-edit-mode {
   position: fixed;
   visibility: hidden;
-  top: 0;
-  left: 0;
 }
 
 .template-row,
-.edit-mode .template-cell-edit-mode  {
+.edit-mode input,
+.edit-mode .btn-edit-mode {
   position: static;
   visibility: visible;
+}
+
+/* Таблица */
+
+table {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+  font-size: 14px;
+  text-align: left;
+  border-collapse: collapse;
+  border-radius: 20px;
+  box-shadow: 0 0 0 10px #F2906B;
+  color: #452F21;
+  margin: 20px;
+  width: 75%;
+}
+th {
+  padding: 10px 8px;
+  background: white;
+  width: 100px;
+}
+table th:first-child {
+  border-top-left-radius: 20px;
+}
+table th:last-child {
+  border-top-right-radius: 20px;
+}
+td {
+  border-top: 10px solid #F2906B;
+  padding: 8px;
+  background: white;
+}
+table td:first-child {
+  border-bottom-left-radius: 20px;
+}
+table td:last-child {
+  border-bottom-right-radius: 20px;
+}
+table input {
+  width: 100%;
+  border: 1px solid #F2906B;
+  padding: 3px;
+}
+
+button {
+  background-color: #F2906B;
+  border: 0px;
+  color: white;
+  padding: 5px;;
+}
+
+.user-data-form {
+  margin: 40px 20px;
+  width: 75%;
+}
+
+.user-data-form input{
+  border: 1px solid #F2906B;
+  padding: 5px;
+  margin-right: 5px;
+  width: 30%;
 }
