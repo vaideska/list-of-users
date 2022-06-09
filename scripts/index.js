@@ -57,7 +57,7 @@ const handleEditUserDataSubmit = ({ cellNameElement, cellPhoneElement, cellNameI
   closeEditMode();
 }
 
-const handleCanselEditModeClick = (event) => {
+const handleCancelEditModeClick = (event) => {
   event.preventDefault();
   closeEditMode();
 }
@@ -81,7 +81,7 @@ const getRowTable = (userData) => {
   editButton.addEventListener('click', handleEditRowClick(dataFields));
   deleteButton.addEventListener('click', handleDeleteRowClick);
   formEditUser.addEventListener('submit', handleEditUserDataSubmit(dataFields));
-  cancelButton.addEventListener('click', handleCanselEditModeClick);
+  cancelButton.addEventListener('click', handleCancelEditModeClick);
 
   return rowElement;
 }
